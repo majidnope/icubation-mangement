@@ -1,0 +1,35 @@
+.usersProgress {
+
+    position: relative;
+    border-radius: 50%;
+    background: conic-gradient(var(--progressColor) var(--progressAdmin), transparent var(--progressAdmin));
+    box-shadow: 0 0 5px 1px var(--progressColor);
+    aspect-ratio: 1/1;
+
+}
+
+.usersProgress::before {
+
+    padding: 20% 0;
+   
+    text-align: center;
+
+
+    content: attr(data-progress);
+
+    color: rgb(190, 190, 190);
+    font-size: 100%;
+    
+    
+    padding-right: 2px;
+    border-radius: 50%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    transform: scale(0.8);
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(56, 53, 53);
+}

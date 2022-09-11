@@ -1,0 +1,76 @@
+.adminNav {
+    width: 100%;
+    height: 10%;
+    background-color: #1e1f23;
+    display: flex;
+    padding-left: 3%;
+    font-family: cursive;
+    font-weight: 500;
+    align-items: center;
+    color: #62d8ca !important;
+    box-shadow: 0 1px 6px 0px #02b6ff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+}
+
+.notification {
+    position: relative;
+}
+
+.tinkle {
+    animation: animate 2s ease-out forwards;
+}
+
+.Notify_count {
+    position: absolute;
+    width: 60%;
+    height: 55%;
+
+    border-radius: 50%;
+    background-color: crimson;
+    color: aliceblue;
+    z-index: 1;
+    right: 0;
+    text-align: center;
+
+}
+
+.redbulb {
+    animation: redbulb 1.4s ease-in-out infinite;
+}
+
+@keyframes redbulb {
+    100%, 0% {
+        filter: drop-shadow(2px 2px 6px crimson);
+    }
+
+    50% {
+        filter: drop-shadow(0px 0px 0px crimson);
+    }
+}
+
+.Notify_count::after {
+    font-size: .6em;
+    top: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    content: attr(data-count);
+}
+
+@keyframes animate {
+    0% {
+        transform: rotateZ(-40deg);
+    }
+
+    50% {
+        transform: rotateZ(40deg);
+    }
+
+    100% {
+        transform: rotateZ(0deg);
+    }
+}

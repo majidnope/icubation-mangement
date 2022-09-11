@@ -1,0 +1,42 @@
+.adminlogin{
+    width: 100%;
+    height:100vh;
+    background-color: rgb(102, 146, 240);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.adminLogForm{
+  width: 400px;
+  height: 500px;
+  background-color: rgb(249, 249, 248);  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+.form1{
+    width:300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.h1{
+    text-align: center;
+
+}
+.label{
+    width:300px;
+    height: 36px;
+    background-color: #ffffff;
+
+}
+.btn{
+    width:300px;
+    height: 40px;
+    background-color: rgb(28, 149, 214);
+    border-radius: 5px;
+    color: #ffffff;
+    border: none;
+}

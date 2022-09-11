@@ -1,0 +1,36 @@
+.appForm{
+    width: 100%;
+    height: 100%;
+    background-color: whitesmoke;
+    
+    overflow-y: scroll;
+    
+}
+.form{
+    width: 60%;
+    height: 10px;
+    background-color: black;
+    display: flex;
+
+    justify-content: center;
+}
+    
+.appliForm {
+    display:flex;
+    flex-direction: column;
+    width:60%;
+    gap:20px;
+    
+
+
+}
+.btn_sumbit{
+    width:100px;
+    height: 50px;
+    background-color: rgb(76, 139, 241);
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    align-self: center;
+    
+}
