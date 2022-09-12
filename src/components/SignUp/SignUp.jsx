@@ -2,17 +2,20 @@ import React from "react";
 import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { LoadingButton } from "@mui/lab";
 
 function SignUp() {
   const [Text, setText] = useState("");
   let url = process.env.REACT_APP_SERVER_IP;
   const [password, setPassword] = useState(0);
   const [feedback, setfeedback] = useState("");
+  const [loading, setLoading] = useState(false);
   let isMail = Text.includes("@");
   let location = useNavigate();
 
   function SignValidation(e) {
     e.preventDefault();
+    setLoading(true);
     let form = new FormData(e.target);
     let valid = isMail && password >= 4;
 
@@ -32,9 +35,10 @@ function SignUp() {
         })
         .then((data) => {
           if (data.status === 200) {
-            
+            setLoading(false)
             alert("You are successfully signUp");
           } else if (data.status === 409) {
+            setLoading(false);
             alert("Account al ready exist");
           }
 
@@ -132,13 +136,13 @@ function SignUp() {
             <label htmlFor="email">Phone Number</label>
           </div>
 
-          <button type="submit" className="btnSign btn btn-success">
-            REGISTER
-          </button>
+          <LoadingButton loading={loading} type="submit" variant="outlined">
+            Sign Up
+          </LoadingButton>
           <p style={{ color: "gray" }}>
             Have already an account?{" "}
             <Link to={"/login"}>
-              <strong>Login Here</strong>
+              <strong>Log In</strong>
             </Link>
           </p>
         </form>

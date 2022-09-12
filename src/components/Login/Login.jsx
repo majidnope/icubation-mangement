@@ -118,14 +118,14 @@ function Login() {
 
           <hr />
           <LoadingButton loading={loading} type="submit" variant="outlined">
-            Submit
+            Sign In
           </LoadingButton>
 
           <p style={{ color: "gray" }}>
             {" "}
             Don't have an account?{" "}
             <Link to={"/signup"}>
-              <strong>SignUp Here</strong>
+              <strong>Sign Up Here</strong>
             </Link>{" "}
           </p>
         </form>
