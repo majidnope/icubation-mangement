@@ -5,9 +5,11 @@ let initialState = {
   userData: "",
   app_data: [],
   usersData: [],
+  adminFetched: false
 };
 
 const reducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
     case "add":
       return { userData: { ...action.userData } };
@@ -18,8 +20,8 @@ const reducer = (state, action) => {
     case "addUsers":
       return { usersData: [...action.usersData] };
     case "addData":
-      return { usersData: action.users, app_data: action.app_data };
-
+      return { usersData: action.users, app_data: action.app_data,adminFetched:action.adminState };
+    
     default:
       break;
   }
@@ -54,20 +56,28 @@ const StoreProvider = ({ children }) => {
     });
   };
   const removeUsers = (id) => {
-    console.log(id);
+    
 
     dispatch({
       type: "addUsers",
       usersData: state.usersData.filter((el) => !(id === el._id)),
     });
   };
-  const adminData = (users,applications) => {
-    dispatch({ type: "addData", users: users, app_data: applications });
+  const adminData = (users,applications,status) => {
+    dispatch({
+      type: "addData",
+      users: users,
+      app_data: applications,
+      adminState:status,
+    });
   };
+
+ 
 
   const value = {
     user: state.userData,
     users: state.usersData ? state.usersData : [],
+    adminState: state.adminFetched,
     app_data: state.app_data ? state.app_data : [],
     loginState: state.userData ? true : false,
     newAppCount: (() => {
@@ -81,7 +91,8 @@ const StoreProvider = ({ children }) => {
     removeUsers,
     setApplication,
     setUsersData,
-    adminData
+    adminData,
+
   };
   
 

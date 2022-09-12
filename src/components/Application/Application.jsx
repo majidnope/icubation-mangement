@@ -5,7 +5,7 @@ import "./Application.css";
 
 function Application() {
   const userData = useContext(Store);
-  console.log(userData.user);
+;
 
   let fieldsPlaceHolder = [
     "Describe Your Team and Background ",

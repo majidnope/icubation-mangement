@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import Store from "../../../utils/userStore/ContextApi";
 import { useNavigate } from "react-router-dom";
 import { app_update } from "../ApplicationList/ApplicationList";
+import { LinearProgress } from "@mui/material";
+import { useEffect } from "react";
 
 function RecordTrack() {
   const app = useContext(Store);
   let nav = useNavigate();
-
-  let table = app.app_data.map((el, index) =>
+  const [loading, setLoading] = useState(true);
+  const table = { data: false };
+  table.data = app.app_data?.map((el, index) =>
     el.status === "declined" ? (
       <tr key={index}>
         <td>🔹</td>
@@ -44,15 +47,16 @@ function RecordTrack() {
       </tr>
     ) : (
       <tr key={index}>
-        <td><li></li></td>
+        <td>
+          <li></li>
+        </td>
         <td>{el._id}</td>
         <td>{el.cname}</td>
         <td>{el.status}</td>
         <td>
           <div
             data-progress={el.progress}
-              style={{
-         
+            style={{
               marginLeft: ".5vw",
               "--progressAdmin": `${el.progress}%`,
               "--progressColor": "rgb(0, 247, 255)",
@@ -79,6 +83,19 @@ function RecordTrack() {
       </tr>
     )
   );
+  
+// ? loading confirmation
+  useEffect(() => {
+    console.log(app.adminState, 'form record');
+    if ((table.data.length===0) && app.adminState===true) {
+      setLoading(true);
+    } else if (app.adminState===false) {
+      setLoading(false);
+    } else {
+      setLoading(true)
+    }
+  });
+
 
   return (
     <div className="left">
@@ -88,6 +105,7 @@ function RecordTrack() {
         >
           Recode Track
         </h2>
+        <LinearProgress hidden={loading} />
 
         <div className="table-responsive ">
           <table className="table table-sm fs-6 table-dark table-striped ">
@@ -102,7 +120,7 @@ function RecordTrack() {
                 <th scope="col"></th>
               </tr>
             </thead>
-            <tbody>{table}</tbody>
+            <tbody>{table.data}</tbody>
           </table>
         </div>
       </div>

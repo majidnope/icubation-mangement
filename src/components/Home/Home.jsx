@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useRef } from "react";
 
 function Home() {
-  console.log(process.env.REACT_APP_SERVER_IP)
+
   let spinnerElement = useRef();
   const emoji = ['😁','😎','🥰','🤑','✌😃'];
   let randomIndex = () => Math.floor(Math.random() * 5);
@@ -24,7 +24,7 @@ function Home() {
   if (token) localStorage.setItem("token", token);
   const isThereAnyDataBase = (body) => {
     return new Promise((resolve, reject) => {
-      console.log(body);
+      
       fetch(`${process.env.REACT_APP_SERVER_IP}/userData`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -44,12 +44,12 @@ function Home() {
       let decoded = jwt_decode(localStorage.getItem("token"));
 
       isThereAnyDataBase(decoded).then((isThere) => {
-        console.log("chk database : ", isThere, decoded);
+        
         if (!isThere) {
           userData.remove();
           localStorage.removeItem("token");
         } else {
-          console.log(decoded, "hi");
+          
           userData.add(decoded);
           setParams("");
         }

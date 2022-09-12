@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./AdminHome.css";
 import AdminNav from "../Navs/AdminNav/AdminNav";
 import AdminSlide from "../AdminSlide/AdminSlide";
@@ -9,13 +9,16 @@ function AdminHome({ children }) {
   const app = useContext(Store);
   let bodyElement = useRef();
   let scrollbar = useRef();
+
   useEffect(() => {
+   app.adminData([],[], false);
     fetch(`${process.env.REACT_APP_SERVER_IP}/admin/adminhome`)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        app.adminData(data.users, data.app);
+   
+        app.adminData(data.users, data.app,true);
       });
   }, []);
 

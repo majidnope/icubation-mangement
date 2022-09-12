@@ -1,10 +1,11 @@
+import { LinearProgress } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Store from "../../../utils/userStore/ContextApi";
 function app_update(id, status, context, index) {
   if (status === "remove") {
     let result = context.app_data.filter((el) => !(id === el._id));
-    console.log(result);
+
     context.setApplication(result);
     fetch(`${process.env.REACT_APP_SERVER_IP}/admin/form-update`, {
       method: "PUT",
@@ -58,10 +59,12 @@ function app_update(id, status, context, index) {
   }
 }
 
+
 function ApplicationList() {
   //using context api
   const app = useContext(Store);
-
+   
+  const [loading, setLoading] = useState(true);
   let nav = useNavigate();
 
   //updating application
@@ -74,6 +77,8 @@ function ApplicationList() {
         app.setApplication(result.app);
       });
   }, []);
+
+
 
   //new application list
   let element = app.app_data.map((el, index) =>
@@ -167,6 +172,20 @@ function ApplicationList() {
       ""
     )
   );
+//  loading confirmation
+  useEffect(() => {
+    console.log(app.adminState, "form record");
+    if ((element.length=== 0||penddingElement === 0) && app.adminState === true) {
+      setLoading(true);
+    } else if (app.adminState === false) {
+      setLoading(false);
+    } else if (app.adminState === true) {
+      setLoading(true);
+    }
+  });
+
+
+
   return (
     <>
       <div className="left">
@@ -180,6 +199,7 @@ function ApplicationList() {
           >
             New applications{" "}
           </h2>
+          <LinearProgress hidden={loading} />
           <div className="table-responsive ">
             <table className="table table-dark table-striped">
               <thead>
@@ -206,6 +226,7 @@ function ApplicationList() {
           >
             Pending applications
           </h2>
+          <LinearProgress hidden={loading} />
 
           <div className="table-responsive">
             <table className="table table-dark table-striped ">

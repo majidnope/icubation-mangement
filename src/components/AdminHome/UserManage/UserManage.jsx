@@ -2,9 +2,14 @@ import { useState } from "react";
 import { React, useContext, useEffect } from "react";
 import Store from "../../../utils/userStore/ContextApi";
 import { getDataFromDatabase } from "../../../utils/fetching";
+import { LinearProgress } from "@mui/material";
 
 function UserManage() {
   const app = useContext(Store);
+
+
+   const [loading, setLoading] = useState(true);
+   
 
   const [search, setSearch] = useState("");
 
@@ -20,7 +25,7 @@ function UserManage() {
   // updating usersData
   useEffect(() => {
     getDataFromDatabase().then((data) => {
-      app.adminData(data.users, data.app);
+      app.adminData(data.users, data.app,true);
     });
   }, []);
   //el.name.toLowerCase().includes(search.toLowerCase())
@@ -49,6 +54,17 @@ function UserManage() {
       ""
     )
   );
+//  loading confirmation
+  useEffect(() => {
+    console.log(app.adminState, "form record");
+    if (table.length === 0 && app.adminState === true) {
+      setLoading(true);
+    } else if (app.adminState === false) {
+      setLoading(false);
+    } else if (app.adminState === true) {
+      setLoading(true);
+    }
+  });
 
   return (
     <div className="left">
@@ -63,7 +79,7 @@ function UserManage() {
             }}
             placeholder="Search for user....."
           />
-
+          <LinearProgress hidden={loading} />;
           <table className="table table-dark table-striped mt-4">
             <thead>
               <tr>

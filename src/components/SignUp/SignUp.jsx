@@ -32,7 +32,7 @@ function SignUp() {
         })
         .then((data) => {
           if (data.status === 200) {
-            console.log("successfully signUp");
+            
             alert("You are successfully signUp");
           } else if (data.status === 409) {
             alert("Account al ready exist");

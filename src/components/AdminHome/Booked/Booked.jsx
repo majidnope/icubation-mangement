@@ -65,7 +65,7 @@ function Booked() {
       let name = bookedSlot_info.get("selected_cname");
       let id = opt.current.options[opt.current.selectedIndex].dataset.id;
       let index = indexOfSlot;
-      console.log(id, name, index);
+     
       app_update(id, "booked", Company, index);
     } else {
       alert("please select a company");

@@ -5,7 +5,7 @@ export function getDataFromDatabase() {
         return res.json();
       })
       .then((result) => {
-        console.log(result);
+   
         resolve(result);
       });
   });
