@@ -177,7 +177,7 @@ function Home() {
         >
           <div
             className="switchColor"
-            data-tooltip={'Change color'}
+            data-tooltip={'Theme'}
           >
             <span
               onClick={() => {
