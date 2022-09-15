@@ -149,7 +149,16 @@ a {
     --bg: var(--sky)
 }
 
+
+.progressSkeleton::after {
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(7, 58, 78, 0.39),
+            transparent) !important;
+}
+
 .progressCircle {
+    display: flex;
     transition: 2s;
     z-index: 2;
     position: relative;
@@ -158,6 +167,8 @@ a {
     border-radius: 50%;
     box-shadow: 2px 0 10px 2px var(--shade);
     aspect-ratio: 1 / 1;
+    align-items: center;
+    justify-content: center;
 }
 
 .progressCircle::after {
@@ -206,6 +217,19 @@ a {
     border-radius: 50%;
     z-index: 2;
     aspect-ratio: 1/1;
+
+}
+
+@keyframes zoomIn {
+
+    100%,
+    0% {
+        box-shadow: inset 1px 1px 20px 2px black;
+    }
+
+    50% {
+        box-shadow: inset 1px 1px 20px 12px black;
+    }
 }
 
 .innerSpin::after {
@@ -373,34 +397,9 @@ a {
 
 }
 
-.switchColor:hover::before {
-    position: absolute;
-    content: attr(data-tooltip);
-    top: 0;
-    width: 50%;
-    padding: 1px;
-    color: rgb(203, 227, 238);
-    height: 30px;
-    font-weight: 400;
-    background-color: #00aeff;
-    transform: translateX(100%);
-    border-radius: 7px;
-    left: 10%;
-    z-index: 1;
-}
 
-.switchColor:hover::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    aspect-ratio: 1/1;
-    transform: translateX(60%) rotate(43deg);
-    width: 21%;
-    left: 95%;
-    background-color: #00aeff;
-    z-index: -1;
 
-}
+
 
 .switchColor span:nth-child(1) {
     position: absolute;

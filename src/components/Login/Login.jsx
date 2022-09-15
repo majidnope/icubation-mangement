@@ -1,13 +1,16 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LoadingButton } from "@mui/lab";
+import { Alert, LoadingButton } from "@mui/lab";
 
 import "./Login.css";
 
 function Login() {
   const [text, setText] = useState("");
   const [password, setPassword] = useState(0);
+  const [typeOFAlert,setAlertType] = useState('')
   const [loading, setLoading] = useState(false);
+  const [AlertMessage, setAlert] = useState("");
+  const [loggedIn, setLoginState] = useState(false);
   const [feedbackForPassword, setfeedbackForPassword] = useState("");
   const passwordFeedback = useRef();
   let location = useNavigate();
@@ -33,25 +36,50 @@ function Login() {
           return res.json();
         })
         .then((data) => {
-          if (data.status === 200) {
-            setLoading(false);
-            alert("logIn success");
-          } else if (data.status === 204) {
-            setLoading(false);
-            alert("Account not exist");
-          } else if (data.status === 206) {
-            setLoading(false);
-            setfeedbackForPassword("Password is incorrect");
-            passwordFeedback.current.classList.add("is-invalid");
-          }
+          switch (data.status) {
+            case 200:
+              setLoading(false);
 
-          location(data.url, { replace: true });
+              setAlert("Successfully logged in");
+              setAlertType('success')
+              setLoginState(true)
+
+              break;
+            case 204:
+              setLoading(false);
+                 setAlertType("error");
+            setLoginState(true);
+              setAlert("Account not exist");
+              break;
+            case 206:
+              setLoading(false);
+                 
+              setLoginState(false);
+              setfeedbackForPassword("Password is incorrect");
+             
+              passwordFeedback.current.classList.add("is-invalid");
+              break;
+            default:
+              break;
+          }
+          setTimeout(()=>location(data.url, { replace: true }),1500)
         });
     }
   }
 
   return (
     <div className="login bg-dark">
+      {loggedIn ? (
+        <Alert
+          className="SlideIn"
+          style={{ zIndex: "4", top: "0", position: "absolute" }}
+          severity={typeOFAlert}
+        >
+          {AlertMessage}
+        </Alert>
+      ) : (
+        ""
+      )}
       <span className="circle"></span>
 
       <div className="logForm">
@@ -122,11 +150,10 @@ function Login() {
           </LoadingButton>
 
           <p style={{ color: "gray" }}>
-            {" "}
-            Don't have an account?{" "}
+            Don't have an account?
             <Link to={"/signup"}>
               <strong>Sign Up Here</strong>
-            </Link>{" "}
+            </Link>
           </p>
         </form>
       </div>

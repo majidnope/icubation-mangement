@@ -30,7 +30,7 @@ const reducer = (state, action) => {
 const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const add = (value) => {
+  const addUser = (value) => {
     dispatch({
       type: "add",
       userData: value,
@@ -86,7 +86,7 @@ const StoreProvider = ({ children }) => {
         : [];
       return count.length;
     })(),
-    add,
+    addUser,
     remove,
     removeUsers,
     setApplication,

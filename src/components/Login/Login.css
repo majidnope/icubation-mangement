@@ -116,3 +116,24 @@ p {
 
 }
 
+.SlideIn {
+    animation: SlideIn 2s forwards
+}
+
+@keyframes SlideIn {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(16px);
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+}
