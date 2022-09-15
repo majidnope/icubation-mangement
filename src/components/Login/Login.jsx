@@ -49,7 +49,7 @@ function Login() {
               setLoading(false);
                  setAlertType("error");
             setLoginState(true);
-              setAlert("Account not exist");
+              setAlert("This account is not exist");
               break;
             case 206:
               setLoading(false);
